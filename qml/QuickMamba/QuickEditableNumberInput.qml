@@ -8,6 +8,7 @@ Rectangle {
     property real minValue: Number.NEGATIVE_INFINITY
     property real maxValue: Number.POSITIVE_INFINITY
     property int decimals: 0
+    property real defaultIncrement: 1
 
     property alias textInput: textInput
 
@@ -42,14 +43,16 @@ Rectangle {
         var oldValueFloat = parseFloat(oldValueStr)
         var pointPosition = oldValueStr.indexOf(".")
 
-        var increment = 1
+        var increment = root.defaultIncrement
 
         /* Calcul the increment value in function of the right digit to the cursor
-         * e.g. 12.2|32 : increment is then 0.01
-         * If cursor is left to the point or negative sign, increment is just default value (1)
+         * e.g. 12.2|32 : increment is then 0.01         * 
+         * The increment is equal to default value in some case :
+         *  - If cursor is left to the point or to the negative sign
+         *  - If there is no focus (e.g. Just  by clicking on arrow buttons)
          * The point is added if there is not and cursor is top right
         */
-        if (!(oldValueFloat < 0 && oldCursorPos == 0)) {
+        if (!(oldValueFloat < 0 && oldCursorPos == 0) && textInput.focus) {
             if (pointPosition == -1)
                 increment = Math.pow(10, oldValueStr.length - oldCursorPos - 1)
             else if (oldCursorPos < pointPosition)
