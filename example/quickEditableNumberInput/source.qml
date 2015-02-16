@@ -11,6 +11,10 @@ Rectangle
 
     property string linkedText: "42.42"
 
+    FocusHandler {
+
+    }
+
     QuickEditableNumberInput {
         id: numberInput
         width: 150
@@ -20,6 +24,7 @@ Rectangle
         minValue: -25
         maxValue: 50
         decimals: 3
+        defaultIncrement: 0.5
 
         // Access to all properties of a classic qml textInput by textInput.<textIntproperty>
         textInput.text: root.linkedText
