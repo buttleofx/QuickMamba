@@ -18,7 +18,7 @@ class QObjectListModel(QtCore.QAbstractListModel):
         self._objects = list()      # Internal list of objects
         self.roles = QtCore.QAbstractListModel.roleNames(self)
         self.ObjectRole = QtCore.Qt.UserRole + 1
-        self.roles[self.ObjectRole] = "object"
+        self.roles[self.ObjectRole] = b"object"
 
     def roleNames(self):
         return self.roles
